@@ -8,7 +8,7 @@ Supports CacheBackedEmbeddings to avoid re-embedding duplicates.
 import uuid
 
 from langchain_openai import OpenAIEmbeddings
-from langchain_community.vectorstores import Qdrant
+from langchain_qdrant import QdrantVectorStore
 from langchain_core.documents import Document
 from langchain.storage import InMemoryByteStore
 from langchain.embeddings import CacheBackedEmbeddings
@@ -53,7 +53,7 @@ def create_session_id() -> str:
 def create_vector_store(
     documents: list[Document],
     session_id: str,
-) -> Qdrant:
+) -> QdrantVectorStore:
     """
     Create a Qdrant vector store for a specific session.
 
@@ -78,7 +78,7 @@ def create_vector_store(
         print(f"[VectorStore] Created collection: {collection_name}")
 
     # Build Qdrant vector store from documents
-    vector_store = Qdrant.from_documents(
+    vector_store = QdrantVectorStore.from_documents(
         documents=documents,
         embedding=embeddings,
         collection_name=collection_name,
@@ -93,7 +93,7 @@ def create_vector_store(
     return vector_store
 
 
-def get_existing_vector_store(session_id: str) -> Qdrant | None:
+def get_existing_vector_store(session_id: str) -> QdrantVectorStore | None:
     """Reconnect to an existing session's vector store."""
     collection_name = get_collection_name(session_id)
     client = get_qdrant_client()
@@ -105,14 +105,14 @@ def get_existing_vector_store(session_id: str) -> Qdrant | None:
 
     embeddings = get_cached_embeddings()
 
-    return Qdrant(
+    return QdrantVectorStore(
         client=client,
         collection_name=collection_name,
-        embeddings=embeddings,
+        embedding=embeddings,
     )
 
 
-def get_dense_retriever(vector_store: Qdrant, top_k: int = RETRIEVAL_TOP_K):
+def get_dense_retriever(vector_store: QdrantVectorStore, top_k: int = RETRIEVAL_TOP_K):
     """Get dense similarity search retriever."""
     return vector_store.as_retriever(
         search_type="similarity",
