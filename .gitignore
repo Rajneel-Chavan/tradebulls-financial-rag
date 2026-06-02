@@ -1,0 +1,22 @@
+# Environment
+.env
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Data
+documents/*.pdf
+evaluation/*_results.json
+
+# Docker
+qdrant_data/
+
+# OS
+.DS_Store
+Thumbs.db
