@@ -2,7 +2,6 @@
 Qdrant vector store with session-isolated collections.
 
 Each user session gets its own collection: tradebulls_{session_id}
-Supports CacheBackedEmbeddings to avoid re-embedding duplicates.
 """
 
 import uuid
@@ -10,8 +9,6 @@ import uuid
 from langchain_openai import OpenAIEmbeddings
 from langchain_qdrant import QdrantVectorStore
 from langchain_core.documents import Document
-from langchain_core.stores import InMemoryByteStore
-from langchain.embeddings import CacheBackedEmbeddings
 from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, VectorParams
 
@@ -28,16 +25,8 @@ def get_qdrant_client() -> QdrantClient:
     return QdrantClient(host=QDRANT_HOST, port=QDRANT_PORT)
 
 
-def get_cached_embeddings() -> CacheBackedEmbeddings:
-    """Get CacheBackedEmbeddings to avoid re-embedding same content."""
-    base_embeddings = OpenAIEmbeddings(model=EMBEDDING_MODEL)
-    store = InMemoryByteStore()
-
-    return CacheBackedEmbeddings.from_bytes_store(
-        underlying_embeddings=base_embeddings,
-        document_embedding_cache=store,
-        namespace=EMBEDDING_MODEL,
-    )
+def get_cached_embeddings() -> OpenAIEmbeddings:
+    return OpenAIEmbeddings(model=EMBEDDING_MODEL)
 
 
 def get_collection_name(session_id: str) -> str:
