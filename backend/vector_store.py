@@ -10,8 +10,8 @@ import uuid
 from langchain_openai import OpenAIEmbeddings
 from langchain_qdrant import QdrantVectorStore
 from langchain_core.documents import Document
-from langchain.storage import InMemoryByteStore
-from langchain.embeddings import CacheBackedEmbeddings
+from langchain_core.stores import InMemoryByteStore
+from langchain_core.embeddings import CacheBackedEmbeddings
 from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, VectorParams
 

@@ -13,11 +13,10 @@ from __future__ import annotations
 
 import cohere
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
-from langchain_community.vectorstores import Qdrant
+from langchain_qdrant import QdrantVectorStore
 from langchain_core.documents import Document
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-from langchain.retrievers import EnsembleRetriever
 from langchain_community.retrievers import BM25Retriever
 
 from backend.config import (
@@ -174,7 +173,7 @@ def cohere_rerank(
 
 def advanced_retrieve(
     query: str,
-    vector_store: Qdrant,
+    vector_store: QdrantVectorStore,
     all_chunks: list[Document],
     top_k: int = RETRIEVAL_TOP_K,
     rerank_top_n: int = RERANK_TOP_N,
