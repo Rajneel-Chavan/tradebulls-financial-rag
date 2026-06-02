@@ -14,6 +14,8 @@ TAVILY_API_KEY = os.getenv("TAVILY_API_KEY")
 # ── Qdrant ────────────────────────────────────────────────────────────
 QDRANT_HOST = os.getenv("QDRANT_HOST", "localhost")
 QDRANT_PORT = int(os.getenv("QDRANT_PORT", 6333))
+QDRANT_URL = os.getenv("QDRANT_URL", "")          # set for Qdrant Cloud
+QDRANT_API_KEY = os.getenv("QDRANT_API_KEY", "")  # set for Qdrant Cloud
 
 # ── LangSmith ─────────────────────────────────────────────────────────
 os.environ.setdefault("LANGCHAIN_TRACING_V2", "true")
