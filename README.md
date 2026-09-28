@@ -111,9 +111,9 @@ User Query
 
 ## 📸 Screenshots
 
-| Account opening query | e-KYC query with sources |
+| Stock price tool | PDF RAG tool with citations |
 |---|---|
-| ![Account opening query](screenshots/account-opening-query.png) | ![e-KYC query with sources](sspending-analytics.jpeg) |
+| ![Stock price tool](screenshots/stock-price-tool.jpeg) | ![PDF RAG tool](screenshots/pdf-rag-tool.jpeg) |
 
 
 ---
