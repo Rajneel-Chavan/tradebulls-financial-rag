@@ -113,7 +113,7 @@ User Query
 
 | Account opening query | e-KYC query with sources |
 |---|---|
-| ![Account opening query](screenshots/account-opening-query.png) | ![e-KYC query with sources](screenshots/ekyc-query-with-sources.png) |
+| ![Account opening query](screenshots/account-opening-query.png) | ![e-KYC query with sources](sspending-analytics.jpeg) |
 
 
 ---
